@@ -1,56 +1,64 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import {useNavigate} from "react-router-dom"
-
+import { useDispatch } from "react-redux";
+import { login } from "../state/authSlice";
 
 const Signup = () => {
-  const [fullName, setfullName] = useState("");
-  const [email, setEmail] = useState("");
+  const [fullName, setFullName] = useState("");
+  const [email, setEmail]     = useState("");
   const [password, setPassword] = useState("");
-
-  const navigate =useNavigate();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleSubmit = async (ev) => {
     ev.preventDefault();
     try {
-      const result = await axios.post("/api/user/signup", {
-        fullName,
-        email,
-        password,
-      });
-      console.log("success in the  signup: saved", result.data);
-      navigate("/signin")
-    } catch (err) {
-      // console.log(err)
-      console.log("signup error", err.message || err.response?.data);
+      const result = await axios.post(
+        "/api/user/signup",
+        { fullName, email, password },
+        { withCredentials: true }
+      );
+
+      console.log("Signup successful:", result.data);
+
+      // Optionally dispatch login if backend sends user in response
+      dispatch(
+        login({
+          id: result.data.user?.id || null,
+          email: result.data.user?.email || email,
+          fullName: result.data.user?.fullName || fullName,
+        })
+      );
+
+      navigate("/");
+    } catch (error) {
+      console.error("Signup error:", error.response?.data || error.message);
     }
   };
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-[#f9f7f3] px-4">
       <h1 className="text-3xl md:text-4xl font-serif mb-6">Sign Up</h1>
-      <form
-        onSubmit={handleSubmit}
-        className="bg-white p-6 rounded shadow-md w-full max-w-md"
-      >
+      <form onSubmit={handleSubmit} className="bg-white p-6 rounded shadow-md w-full max-w-md">
         <input
           type="text"
-          placeholder="fullName"
           value={fullName}
+          placeholder="Name"
           className="w-full mb-4 p-2 border border-gray-300 rounded"
-          onChange={(e) => setfullName(e.target.value)}
+          onChange={(e) => setFullName(e.target.value)}
         />
         <input
           type="email"
-          placeholder="email"
           value={email}
+          placeholder="Email"
           className="w-full mb-4 p-2 border border-gray-300 rounded"
           onChange={(e) => setEmail(e.target.value)}
         />
         <input
           type="password"
-          placeholder="password"
           value={password}
+          placeholder="Password"
           className="w-full mb-4 p-2 border border-gray-300 rounded"
           onChange={(e) => setPassword(e.target.value)}
         />
