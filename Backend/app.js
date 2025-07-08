@@ -31,17 +31,17 @@ app.use(cookieParser())
 
 //routes
 import userRoutes from "./routes/users.routes.js"
+import blogRoutes from "./routes/blogs.routes.js"
 app.use("/api/user",userRoutes)
-
+app.use("/api/blog",blogRoutes)
 
 const PORT = process.env.PORT || 8000
 
 
 app.get("/",(req,res)=>{
-   
-    res.send("servers home page ")
-    
+    res.send("servers home page ") 
 })
+
 
 
 app.listen(PORT,(req,res)=>{
