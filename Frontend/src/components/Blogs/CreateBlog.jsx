@@ -8,11 +8,13 @@ const CreateBlog = () => {
   const [avatarImage, setAvatarImage] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [successMessage, setSuccessMessage] = useState(""); 
 
   const handleSubmit = async (ev) => {
     ev.preventDefault();
     setLoading(true);
     setError("");
+    setSuccessMessage(""); 
 
     try {
       const formData = new FormData();
@@ -31,9 +33,10 @@ const CreateBlog = () => {
       setContent("");
       setUploadImage(null);
       setAvatarImage(null);
-      alert("Blog created successfully!");
+      setSuccessMessage("Blog created successfully!"); 
+      setTimeout(() => setSuccessMessage(""), 5000);
     } catch (err) {
-      console.error(err);
+      console.error(err); 
       setError(err.response?.data?.msg || "Something went wrong");
     } finally {
       setLoading(false);
@@ -84,6 +87,7 @@ const CreateBlog = () => {
         </div>
 
         {error && <p className="text-red-600 font-medium">{error}</p>}
+        {successMessage && <p className="text-green-600 font-medium">{successMessage}</p>}
 
         <button
           type="submit"

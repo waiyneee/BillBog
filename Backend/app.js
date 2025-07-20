@@ -29,9 +29,15 @@ app.use(express.json())
 app.use(express.urlencoded({extended:false}))
 app.use(cookieParser())
 
+
+//static files are served here...
+app.use("/public",express.static("public"))
+
 //routes
 import userRoutes from "./routes/users.routes.js"
 import blogRoutes from "./routes/blogs.routes.js"
+
+
 app.use("/api/user",userRoutes)
 app.use("/api/blog",blogRoutes)
 
