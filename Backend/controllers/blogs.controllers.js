@@ -33,7 +33,7 @@ async function createBlog(req,res){
    }
 }
 
-async function getAllBlogs(){
+async function getAllBlogs(req,res){
 
     
     try{

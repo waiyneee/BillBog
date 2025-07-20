@@ -18,7 +18,7 @@ const upload =multer({
 
 
 
-import { createBlog } from "../controllers/blogs.controllers.js"
+import { createBlog,getAllBlogs } from "../controllers/blogs.controllers.js"
 
 
 
@@ -32,7 +32,7 @@ router.post
 createBlog
 );
 
-router.get("/all",getallBlogs)
+router.get("/all",getAllBlogs)
 
 
 export default router 
