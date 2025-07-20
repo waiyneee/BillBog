@@ -7,6 +7,7 @@ import Signin from "../src/components/Signin"
 import Signup from "./components/Signup"
 import Footer from "./components/Footer"
 import CreateBlog from './components/Blogs/CreateBlog'
+import BlogList from './components/Blogs/BlogList'
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
             <>
               <HeroSection />
               <Navigate />
+              <BlogList />
             </>
           }
         />

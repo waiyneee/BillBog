@@ -12,7 +12,7 @@ const HeroSection = () => {
       </p>
       <button className="bg-green-600 hover:bg-green-700 text-white font-semibold px-6 py-3 rounded mb-4">
        <a href="/add" className="underline hover:text-green-600">
-          Go to Blogs
+          Write a Blog
         </a>
       </button>
       <p className="text-gray-900">
