@@ -18,7 +18,7 @@ const upload =multer({
 
 
 
-import { createBlog,getAllBlogs } from "../controllers/blogs.controllers.js"
+import { createBlog,getAllBlogs, getSingleBlog } from "../controllers/blogs.controllers.js"
 
 
 
@@ -27,12 +27,13 @@ router.post
     authenticateToken,
     upload.fields([
         {name:`uploadImage`,maxCount:1},
-        {name:`avatarImage`,maxCount:1}
+        {name:`upload2Image`,maxCount:1}
     ]),
 createBlog
 );
 
 router.get("/all",getAllBlogs)
+router.get("/:id",getSingleBlog)
 
 
 export default router 

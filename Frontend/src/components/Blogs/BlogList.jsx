@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
+import {useNavigate} from "react-router-dom"
 import axios from "axios";
 
 const BlogList = () => {
+  const navigate = useNavigate();
   const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -24,6 +26,11 @@ const BlogList = () => {
 
     fetchBlogs();
   }, []); 
+
+  const handleReadMore = function(blogId){
+    navigate(`/blogs/${blogId}`)
+
+  }
 
   if (loading) {
     return (
@@ -74,7 +81,7 @@ const BlogList = () => {
                   {/* Read More Button */}
                   <button
                     className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-2 rounded-xl transition duration-200"
-                    onClick={() => alert(`View details for: ${blog.title}`)} // Placeholder for now
+                    onClick={() => handleReadMore(blog._id)} 
                   >
                     Read More
                   </button>

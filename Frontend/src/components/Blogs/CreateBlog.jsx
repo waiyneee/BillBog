@@ -1,11 +1,15 @@
 import React, { useState } from "react";
 import axios from "axios";
+import {useNavigate} from "react-router-dom"
 
 const CreateBlog = () => {
+  const navigate= useNavigate();
+
+
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [uploadImage, setUploadImage] = useState(null);
-  const [avatarImage, setAvatarImage] = useState(null);
+  const [upload2Image, setUpload2Image] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [successMessage, setSuccessMessage] = useState(""); 
@@ -21,7 +25,7 @@ const CreateBlog = () => {
       formData.append("title", title);
       formData.append("content", content);
       if (uploadImage) formData.append("uploadImage", uploadImage);
-      if (avatarImage) formData.append("avatarImage", avatarImage);
+      if (upload2Image) formData.append("upload2Image", upload2Image);
 
       const res = await axios.post("/api/blog/add", formData, {
         withCredentials: true,
@@ -32,9 +36,10 @@ const CreateBlog = () => {
       setTitle("");
       setContent("");
       setUploadImage(null);
-      setAvatarImage(null);
+      setUpload2Image(null);
       setSuccessMessage("Blog created successfully!"); 
       setTimeout(() => setSuccessMessage(""), 5000);
+      navigate("/")
     } catch (err) {
       console.error(err); 
       setError(err.response?.data?.msg || "Something went wrong");
@@ -81,7 +86,7 @@ const CreateBlog = () => {
           <input
             type="file"
             accept="image/*"
-            onChange={(e) => setAvatarImage(e.target.files[0])}
+            onChange={(e) => setUpload2Image(e.target.files[0])}
             className="border border-gray-300 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-600"
           />
         </div>

@@ -8,6 +8,7 @@ import Signup from "./components/Signup"
 import Footer from "./components/Footer"
 import CreateBlog from './components/Blogs/CreateBlog'
 import BlogList from './components/Blogs/BlogList'
+import SingleBlog from './components/Blogs/SingleBlog'
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
         <Route path="/signin" element={<Signin />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/add" element={<CreateBlog/>} />
+        <Route path="/blogs/:id" element={<SingleBlog />} />
         </Routes>
       <Footer />
     </Router>
