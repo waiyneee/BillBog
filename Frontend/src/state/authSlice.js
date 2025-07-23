@@ -4,8 +4,9 @@ const initialState = {
   isLoggedIn: false,
   email:null,
   fullName:null,
+  id:null,
 
-  //username,email,password
+  //username,email,password is imp. only
 };
 
 const authSlice = createSlice({
@@ -29,4 +30,10 @@ const authSlice = createSlice({
 });
 
 export const { login, logout } = authSlice.actions;
+export const selectIsLoggedIn = (state) => state.auth.isLoggedIn;
+export const selectUserEmail = (state) => state.auth.email;
+export const selectUserFullName = (state) => state.auth.fullName;
+export const selectUserId = (state) => state.auth.id;
+
+
 export default authSlice.reducer;
