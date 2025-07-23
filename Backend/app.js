@@ -4,12 +4,6 @@ import express from "express"
 const app=express()
 
 import cookieParser from "cookie-parser"
-// import cors from "cors"
-
-// app.use(cors({
-//     origin:"http://localhost:5173",
-//     credentials:true,
-// })) no need proxy is ther --->mig1
 
 import mongoose from "mongoose"
 
@@ -36,16 +30,18 @@ app.use("/public",express.static("public"))
 //routes
 import userRoutes from "./routes/users.routes.js"
 import blogRoutes from "./routes/blogs.routes.js"
+import interractionRoutes from "./routes/interractions.routes.js"
 
 
 app.use("/api/user",userRoutes)
 app.use("/api/blog",blogRoutes)
+app.use("/api/interactions", interractionRoutes);
 
 const PORT = process.env.PORT || 8000
 
 
 app.get("/",(req,res)=>{
-    res.send("servers home page ") 
+    res.send("servers home page ")
 })
 
 
@@ -53,6 +49,3 @@ app.get("/",(req,res)=>{
 app.listen(PORT,(req,res)=>{
     console.log(`server started successfully at port : ${PORT}`)
 })
-
-
-

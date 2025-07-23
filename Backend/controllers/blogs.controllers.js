@@ -1,15 +1,12 @@
 import Blog from "../models/blogs.model.js"
 
 async function createBlog(req,res){
-
     const { title, content} = req.body;
     if (!title || !content) {
       return res.status(400).json({ msg: "Title and content are required" });
     }
-
-    
     const uploadImageFile = req.files?.uploadImage ? req.files.uploadImage[0] : null;
-    const upload2ImageFile = req.files?.upload2Image ? req.files.upload2Image[0] : null; 
+    const upload2ImageFile = req.files?.upload2Image ? req.files.upload2Image[0] : null;
 
    try {
      const uploadImagePath = uploadImageFile ? uploadImageFile.path : null;
@@ -27,24 +24,21 @@ async function createBlog(req,res){
      return res.status(201).json({ msg: "Blog created successfully", blogId: blog._id });
 
    } catch (err) {
-  
     console.error("Error creating blog:", err);
     return res.status(500).json({msg:"Error in blog creation", error: err.message });
    }
 }
 
 async function getAllBlogs(req,res){
-
-    
     try{
-        const blogs=await Blog.find({}).sort({createdAt:-1})
-        return res.status(200).json({blogs:blogs})
-   
-
+    
+        const blogs=await Blog.find({})
+                                .populate('createdBy', 'fullName email') 
+                                .sort({createdAt:-1});
+        return res.status(200).json({blogs:blogs});
     }catch(err){
-        console.log(err)
-        return res.staus(500).json({msg:`error in fetching all blogs`})
-
+        console.error("Error in fetching all blogs:", err); 
+        return res.status(500).json({msg:`Error in fetching all blogs`}); 
     }
 }
 
@@ -52,7 +46,7 @@ async function getSingleBlog(req, res) {
     try {
         const { id } = req.params;
         
-        const blog = await Blog.findById(id); 
+        const blog = await Blog.findById(id).populate('createdBy', 'fullName email'); // Populate createdBy
 
         if (!blog) {
             return res.status(404).json({ msg: "Blog not found" });
@@ -67,6 +61,5 @@ async function getSingleBlog(req, res) {
         return res.status(500).json({ msg: "Error fetching blog", error: error.message });
     }
 }
-
 
 export {createBlog,getAllBlogs,getSingleBlog}

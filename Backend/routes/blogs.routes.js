@@ -36,4 +36,4 @@ router.get("/all",getAllBlogs)
 router.get("/:id",getSingleBlog)
 
 
-export default router 
+export default router

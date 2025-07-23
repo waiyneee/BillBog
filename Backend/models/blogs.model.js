@@ -15,17 +15,15 @@ const blogSchema= mongoose.Schema({
         type:String,
         
     },
-    createdBy:{
+    createdBy:{ 
         type:Schema.Types.ObjectId,
         ref:"user",
     },
-    upload2Image:{
+    upload2Image:{ 
         type:String,
         
     }
 },{timestamps:true})
-
-
 
 
 const Blog = mongoose.model("blog",blogSchema)
