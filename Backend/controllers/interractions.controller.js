@@ -5,7 +5,7 @@ import Comment from "../models/comments.model.js"
 
 async function toggleLike(req,res){
     const {blogId}= req.params
-    const userId = req.user._id 
+    const userId = req.user.id 
 
     if(!userId){
         return res.status(401).json({msg:"Authentication required to like a blog"})
@@ -35,7 +35,7 @@ async function toggleLike(req,res){
 
 async function checkUserLike(req, res) {
     const { blogId } = req.params;
-    const userId = req.user._id; 
+    const userId = req.user.id; 
 
     if (!userId) {
         return res.status(200).json({ liked: false });
@@ -63,7 +63,7 @@ async function getLikesCount(req, res) {
 
 async function addComments(req,res){
     const {blogId} =req.params
-    const userId = req.user._id 
+    const userId = req.user.id 
     const {text}=req.body
 
      if (!userId) {

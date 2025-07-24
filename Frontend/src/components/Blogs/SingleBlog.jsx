@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams, Link } from "react-router-dom";
-import { useSelector } from 'react-redux'; 
-import { selectIsLoggedIn, selectUserId } from '../../state/authSlice'; 
+import { useSelector } from 'react-redux';
+import { selectIsLoggedIn, selectUserId } from '../../state/authSlice';
 
 const SingleBlog = () => {
   const { id } = useParams();
@@ -12,7 +12,7 @@ const SingleBlog = () => {
 
   // Redux state for authentication
   const isLoggedIn = useSelector(selectIsLoggedIn);
-  const currentUserId = useSelector(selectUserId); // Get current user's ID from Redux
+  const currentUserId = useSelector(selectUserId);
 
   // State for Likes
   const [likesCount, setLikesCount] = useState(0);
@@ -23,29 +23,26 @@ const SingleBlog = () => {
   const [newCommentText, setNewCommentText] = useState("");
   const [commentError, setCommentError] = useState("");
 
-  
+
   const fetchInteractionData = async () => {
     if (!id) return;
 
     try {
-      
-      const likesRes = await axios.get(`/api/interactions/${id}/likes/count`, { withCredentials: true }); // Added withCredentials
+      const likesRes = await axios.get(`/api/interactions/${id}/likes/count`, { withCredentials: true });
       setLikesCount(likesRes.data.count);
 
-      
       if (isLoggedIn) {
         const userLikeRes = await axios.get(`/api/interactions/${id}/likes/check`, { withCredentials: true });
         setUserLiked(userLikeRes.data.liked);
       } else {
         setUserLiked(false);
       }
-      
+
       const commentsRes = await axios.get(`/api/interactions/${id}/comments`);
       setComments(commentsRes.data.comments);
 
     } catch (err) {
       console.error(`Error fetching interaction data for blog ${id}:`, err);
-
     }
   };
 
@@ -65,20 +62,19 @@ const SingleBlog = () => {
 
     if (id) {
       fetchBlog();
-      fetchInteractionData(); 
+      fetchInteractionData();
     }
-  }, [id, isLoggedIn]); 
+  }, [id, isLoggedIn]);
 
 
   const handleToggleLike = async () => {
     if (!isLoggedIn) {
-      alert("Please sign in to like this blog."); 
+      alert("Please sign in to like this blog.");
       return;
     }
     try {
       const res = await axios.post(`/api/interactions/${id}/like`, {}, { withCredentials: true });
       setUserLiked(res.data.liked);
-      
       fetchInteractionData();
     } catch (err) {
       console.error("Error toggling like:", err);
@@ -86,12 +82,12 @@ const SingleBlog = () => {
     }
   };
 
-  
+
   const handleAddComment = async (e) => {
     e.preventDefault();
     setCommentError("");
     if (!isLoggedIn) {
-      alert("Please sign in to comment on this blog."); 
+      alert("Please sign in to comment on this blog.");
       return;
     }
     if (newCommentText.trim() === "") {
@@ -101,7 +97,7 @@ const SingleBlog = () => {
 
     try {
       const res = await axios.post(`/api/interactions/${id}/comment`, { text: newCommentText }, { withCredentials: true });
-      setNewCommentText(""); 
+      setNewCommentText("");
       fetchInteractionData();
     } catch (err) {
       console.error("Error adding comment:", err);
@@ -142,9 +138,10 @@ const SingleBlog = () => {
 
   return (
     <div className="min-h-screen bg-[#f9f7f3] py-10 px-4">
-      <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-lg p-8 space-y-6">
-        {/* Title at top */}
-        <h1 className="text-3xl md:text-4xl font-bold text-gray-800 font-inter text-center mb-6">
+      {/* Removed bg-white, rounded-2xl, shadow-lg, p-8 */}
+      <div className="max-w-3xl mx-auto space-y-6"> {/* Changed max-w-4xl to max-w-3xl */}
+        {/* Title at top - Different font, bold, and slightly larger */}
+        <h1 className="text-4xl md:text-5xl font-extrabold text-gray-800 font-serif text-center mb-6 leading-tight">
           {blog.title}
         </h1>
 
@@ -173,8 +170,8 @@ const SingleBlog = () => {
           )}
         </div>
 
-        {/* Content after images */}
-        <div className="prose max-w-none text-gray-700 leading-relaxed text-lg mt-6">
+        {/* Content after images - Different font and relaxed leading */}
+        <div className="prose max-w-none text-gray-700 font-sans leading-relaxed text-lg mt-6">
           <p>{blog.content}</p>
         </div>
 
@@ -187,7 +184,7 @@ const SingleBlog = () => {
             }`}
             title={userLiked ? "Unlike" : "Like"}
           >
-            <span className="text-2xl">❤️</span> {/* Red heart emoji */}
+            <span className="text-2xl">❤️</span>
             <span className="text-lg font-semibold">{likesCount}</span>
           </button>
           <span className="text-gray-600">Likes</span>

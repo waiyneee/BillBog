@@ -7,7 +7,7 @@ import { createToken } from "../services/authentication.js";
 async function signupUser(req, res) {
   try {
     const { fullName, password, email } = req.body;
-    console.log(req.body);
+    
 
     await User.create({
       fullName,

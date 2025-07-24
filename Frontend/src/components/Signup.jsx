@@ -23,15 +23,9 @@ const Signup = () => {
       console.log("Signup successful:", result.data);
 
       // Optionally dispatch login if backend sends user in response
-      dispatch(
-        login({
-          id: result.data.user?.id || null,
-          email: result.data.user?.email || email,
-          fullName: result.data.user?.fullName || fullName,
-        })
-      );
+     
 
-      navigate("/");
+      navigate("/signin");
     } catch (error) {
       console.error("Signup error:", error.response?.data || error.message);
     }

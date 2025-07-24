@@ -8,7 +8,7 @@ const HeroSection = () => {
         <span className="text-green-600">give</span> today?
       </h1>
       <p className="text-gray-800 max-w-xl mb-8">
-        Write your interests, posts, blogs anonymously.
+        Write your interests, posts, blogs.
       </p>
       <button className="bg-green-600 hover:bg-green-700 text-white font-semibold px-6 py-3 rounded mb-4">
        <a href="/add" className="underline hover:text-green-600">
@@ -17,7 +17,7 @@ const HeroSection = () => {
       </button>
       <p className="text-gray-900">
         Already have an account?{" "}
-        <a href="#" className="underline hover:text-green-600">
+        <a href="/signin" className="underline hover:text-green-600">
           Sign in
         </a>
       </p>

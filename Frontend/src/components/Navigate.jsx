@@ -8,15 +8,14 @@ const Navigate = () => {
         {/* Left: Text */}
         <div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif text-gray-900 mb-4">
-            Smarter notes with AI Transcribe
+            Your Thoughts, Unfiltered. Your Voice, Amplified. 
           </h2>
           <p className="text-gray-800 mb-6">
-            Turn spoken words into organized, searchable notes in seconds.
-            Evernote’s AI Transcribe feature automatically converts your audio
-            into accurate text—perfect for meetings, lectures, or quick thoughts
-            on the go. Save time, stay focused, and never miss a detail.
+             BillBog is your canvas for ideas. Share your unique perspectives, 
+             delve into topics you love, and connect with a community that values
+             authentic expression. Start writing, start sharing. 
           </p>
-          <a href="#" className="underline text-gray-900 hover:text-green-600">
+          <a href="/signup" className="underline text-gray-900 hover:text-green-600">
             Take me there
           </a>
         </div>
