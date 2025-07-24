@@ -34,6 +34,9 @@ const Navbar = () => {
             <a href="/" className="text-gray-700 hover:text-green-600">
               Home
             </a>
+             <a href="/all-blogs" className="text-gray-700 hover:text-green-600">
+              All Blogs
+            </a>
 
             {/* Show Sign In & Sign Up if not logged in */}
             {!isLoggedIn && (

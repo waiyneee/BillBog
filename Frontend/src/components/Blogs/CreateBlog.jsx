@@ -39,7 +39,7 @@ const CreateBlog = () => {
       setUpload2Image(null);
       setSuccessMessage("Blog created successfully!"); 
       setTimeout(() => setSuccessMessage(""), 5000);
-      navigate("/")
+      navigate("/all-blogs")
     } catch (err) {
       console.error(err); 
       setError(err.response?.data?.msg || "Something went wrong");

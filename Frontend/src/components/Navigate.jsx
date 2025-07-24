@@ -15,7 +15,7 @@ const Navigate = () => {
              delve into topics you love, and connect with a community that values
              authentic expression. Start writing, start sharing. 
           </p>
-          <a href="/signup" className="underline text-gray-900 hover:text-green-600">
+          <a href="/all-blogs" className="underline text-gray-900 hover:text-green-600">
             Take me there
           </a>
         </div>

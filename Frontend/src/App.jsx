@@ -18,6 +18,7 @@ import SingleBlog from './components/Blogs/SingleBlog';
 
 
 
+
 const AppContent = () => {
   const dispatch = useDispatch();
 
@@ -53,14 +54,14 @@ const AppContent = () => {
             <>
               <HeroSection />
               <Navigate />
-              <BlogList /> 
+            
             </>
           }
         />
         <Route path="/signin" element={<Signin />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/add" element={<CreateBlog />} />
-        
+        <Route path="/all-blogs" element={<BlogList />} />
         <Route path="/blogs/:id" element={<SingleBlog />} />
       </Routes>
       <Footer />

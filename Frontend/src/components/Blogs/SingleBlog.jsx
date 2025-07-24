@@ -118,7 +118,7 @@ const SingleBlog = () => {
     return (
       <div className="min-h-screen bg-[#f9f7f3] flex flex-col justify-center items-center">
         <p className="text-red-600 text-lg mb-4">{error}</p>
-        <Link to="/" className="text-green-600 hover:underline">
+        <Link to="/all-blogs" className="text-green-600 hover:underline">
           Go back to all blogs
         </Link>
       </div>
@@ -129,7 +129,7 @@ const SingleBlog = () => {
     return (
       <div className="min-h-screen bg-[#f9f7f3] flex flex-col justify-center items-center">
         <p className="text-gray-700 text-lg mb-4">Blog not found.</p>
-        <Link to="/" className="text-green-600 hover:underline">
+        <Link to="/all-blogs" className="text-green-600 hover:underline">
           Go back to all blogs
         </Link>
       </div>
@@ -235,7 +235,7 @@ const SingleBlog = () => {
         {/* Back button */}
         <div className="text-center mt-8">
           <Link
-            to="/"
+            to="/all-blogs"
             className="inline-block bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-2 px-6 rounded-xl transition duration-200"
           >
             ← Back to All Blogs

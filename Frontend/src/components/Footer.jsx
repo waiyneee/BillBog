@@ -9,7 +9,7 @@ const Footer = () => {
         <div>
           <h3 className="text-lg font-semibold mb-3">About</h3>
           <p>
-            BillBog helps you write and share your thoughts, interests, and blogs anonymously.
+            BillBog helps you write and share your thoughts, interests, and blogs.
           </p>
         </div>
 
@@ -21,13 +21,13 @@ const Footer = () => {
               <a href="/" className="hover:text-green-600">Home</a>
             </li>
             <li>
-              <a href="/blogs" className="hover:text-green-600">Blogs</a>
+              <a href="/" className="hover:text-green-600">Blogs</a>
             </li>
             <li>
-              <a href="/about" className="hover:text-green-600">About</a>
+              <a href="/" className="hover:text-green-600">About</a>
             </li>
             <li>
-              <a href="/contact" className="hover:text-green-600">Contact</a>
+              <a href="/" className="hover:text-green-600">Contact</a>
             </li>
           </ul>
         </div>
@@ -37,13 +37,13 @@ const Footer = () => {
           <h3 className="text-lg font-semibold mb-3">Follow & Legal</h3>
           <ul className="space-y-2">
             <li>
-              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="hover:text-green-600">Twitter</a>
+              <a href="/" target="_blank" rel="noopener noreferrer" className="hover:text-green-600">Twitter</a>
             </li>
             <li>
-              <a href="/privacy" className="hover:text-green-600">Privacy Policy</a>
+              <a href="/" className="hover:text-green-600">Privacy Policy</a>
             </li>
             <li>
-              <a href="/terms" className="hover:text-green-600">Terms of Service</a>
+              <a href="/" className="hover:text-green-600">Terms of Service</a>
             </li>
           </ul>
         </div>
@@ -52,7 +52,7 @@ const Footer = () => {
 
       {/* Bottom line */}
       <div className="border-t border-gray-200 text-center text-xs text-gray-500 py-4">
-        © {new Date().getFullYear()} BillBog. All rights reserved.
+        © {new Date().getFullYear()} waiyneee. All rights reserved.
       </div>
     </footer>
   );
