@@ -5,9 +5,9 @@
       "src": "frontend/package.json",
       "use": "@vercel/static-build",
       "config": {
-        "outputDirectory": "frontend/dist",
-        "installCommand": "cd frontend && npm install",
-        "buildCommand": "cd frontend && npm run build"
+        "distDir": "frontend/dist",
+        "installCommand": "npm install --prefix frontend",
+        "buildCommand": "npm run build --prefix frontend"
       }
     },
     {
@@ -15,19 +15,26 @@
       "use": "@vercel/node",
       "config": {
         "includeFiles": ["backend/**"],
-        "installCommand": "cd backend && npm install",
-        "buildCommand": "cd backend && npm run build"
+        "installCommand": "npm install --prefix backend",
+        "buildCommand": "npm run build --prefix backend"
       }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "backend/app.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
     }
   ],
   "rewrites": [
     {
-      "source": "/api/(.*)",
-      "destination": "/backend/app.js"
-    },
-    {
       "source": "/(.*)",
       "destination": "/index.html"
     }
-  ]
+  ],
+  "outputDirectory": "frontend/dist"
 }
