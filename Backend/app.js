@@ -2,6 +2,7 @@ import dotenv from "dotenv"
 dotenv.config();
 import express from "express"
 const app=express()
+import {v2 as cloudinary} from "cloudinary"
 
 import cookieParser from "cookie-parser"
 
@@ -15,6 +16,13 @@ mongoose.connect((process.env.MONGO_DB_URL))
     console.log(`error :`, err)
 })
 
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+  secure: true
+});
+
 import User from "./models/user.model.js"
 
 
@@ -24,8 +32,8 @@ app.use(express.urlencoded({extended:false}))
 app.use(cookieParser())
 
 
-//static files are served here...
-app.use("/public",express.static("public"))
+// REMOVED: Static files are no longer served locally from /public
+// app.use("/public",express.static("public"))
 
 //routes
 import userRoutes from "./routes/users.routes.js"

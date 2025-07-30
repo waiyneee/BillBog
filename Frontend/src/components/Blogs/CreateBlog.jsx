@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import axios from "axios";
-import {useNavigate} from "react-router-dom"
+import { useNavigate } from "react-router-dom";
+import imageCompression from 'browser-image-compression'; 
 
 const CreateBlog = () => {
-  const navigate= useNavigate();
-
+  const navigate = useNavigate();
 
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
@@ -12,20 +12,54 @@ const CreateBlog = () => {
   const [upload2Image, setUpload2Image] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [successMessage, setSuccessMessage] = useState(""); 
+  const [successMessage, setSuccessMessage] = useState("");
+
+  // Helper function to compress image
+  const compressImage = async (file) => {
+    if (!file) return null;
+
+    const options = {
+      maxSizeMB: 1, // (max file size in MB) - target 1MB to stay well under Cloudinary's 10MB limit
+      maxWidthOrHeight: 1920, // max width or height in pixels
+      useWebWorker: true, 
+      fileType: file.type 
+    };
+
+    try {
+      const compressedFile = await imageCompression(file, options);
+      console.log(`Original file size: ${file.size / 1024 / 1024} MB`);
+      console.log(`Compressed file size: ${compressedFile.size / 1024 / 1024} MB`);
+      return compressedFile;
+    } catch (error) {
+      console.error("Image compression error:", error);
+      setError("Failed to compress image. Please try a smaller file.");
+      return null;
+    }
+  };
+
 
   const handleSubmit = async (ev) => {
     ev.preventDefault();
     setLoading(true);
     setError("");
-    setSuccessMessage(""); 
+    setSuccessMessage("");
 
     try {
+      
+      const compressedUploadImage = await compressImage(uploadImage);
+      const compressedUpload2Image = await compressImage(upload2Image);
+
+      if ((uploadImage && !compressedUploadImage) || (upload2Image && !compressedUpload2Image)) {
+        
+        setLoading(false);
+        return;
+      }
+
       const formData = new FormData();
       formData.append("title", title);
       formData.append("content", content);
-      if (uploadImage) formData.append("uploadImage", uploadImage);
-      if (upload2Image) formData.append("upload2Image", upload2Image);
+      if (compressedUploadImage) formData.append("uploadImage", compressedUploadImage);
+      if (compressedUpload2Image) formData.append("upload2Image", compressedUpload2Image);
 
       const res = await axios.post("/api/blog/add", formData, {
         withCredentials: true,
@@ -37,11 +71,11 @@ const CreateBlog = () => {
       setContent("");
       setUploadImage(null);
       setUpload2Image(null);
-      setSuccessMessage("Blog created successfully!"); 
+      setSuccessMessage("Blog created successfully!");
       setTimeout(() => setSuccessMessage(""), 5000);
-      navigate("/all-blogs")
+      navigate("/all-blogs");
     } catch (err) {
-      console.error(err); 
+      console.error(err);
       setError(err.response?.data?.msg || "Something went wrong");
     } finally {
       setLoading(false);

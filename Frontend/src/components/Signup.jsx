@@ -22,7 +22,7 @@ const Signup = () => {
 
       console.log("Signup successful:", result.data);
 
-      // Optionally dispatch login if backend sends user in response
+      
      
 
       navigate("/signin");

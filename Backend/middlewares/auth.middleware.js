@@ -7,6 +7,7 @@ export default function authenticateToken(req, res, next) {
   try {
     const user = validateToken(token);
     req.user = user; 
+    
     next();
   } catch (err) {
     console.error("JWT verify error:", err);

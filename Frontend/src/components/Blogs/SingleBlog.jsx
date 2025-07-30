@@ -138,44 +138,38 @@ const SingleBlog = () => {
 
   return (
     <div className="min-h-screen bg-[#f9f7f3] py-10 px-4">
-      {/* Removed bg-white, rounded-2xl, shadow-lg, p-8 */}
-      <div className="max-w-3xl mx-auto space-y-6"> {/* Changed max-w-4xl to max-w-3xl */}
-        {/* Title at top - Different font, bold, and slightly larger */}
+      <div className="max-w-3xl mx-auto space-y-6">
         <h1 className="text-4xl md:text-5xl font-extrabold text-gray-800 font-serif text-center mb-6 leading-tight">
           {blog.title}
         </h1>
 
-        {/* Created By */}
         {blog.createdBy && (
           <p className="text-gray-600 text-sm mb-4 text-center">
             By: <span className="font-semibold">{blog.createdBy.fullName || blog.createdBy.email || 'Anonymous'}</span>
           </p>
         )}
 
-        {/* Images */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {blog.uploadImage && (
             <img
-              src={`http://localhost:8080/${blog.uploadImage.replace('./', '')}`}
+              src={blog.uploadImage} 
               alt="Blog main"
               className="w-full h-64 object-cover rounded-xl shadow-md"
             />
           )}
           {blog.upload2Image && (
             <img
-              src={`http://localhost:8080/${blog.upload2Image.replace('./', '')}`}
+              src={blog.upload2Image} 
               alt="Blog secondary"
               className="w-full h-64 object-cover rounded-xl shadow-md"
             />
           )}
         </div>
 
-        {/* Content after images - Different font and relaxed leading */}
         <div className="prose max-w-none text-gray-700 font-sans leading-relaxed text-lg mt-6">
           <p>{blog.content}</p>
         </div>
 
-        {/* Likes Section */}
         <div className="flex items-center space-x-4 mt-6 border-t border-gray-200 pt-4">
           <button
             onClick={handleToggleLike}
@@ -190,11 +184,9 @@ const SingleBlog = () => {
           <span className="text-gray-600">Likes</span>
         </div>
 
-        {/* Comments Section */}
         <div className="mt-8 border-t border-gray-200 pt-4">
           <h2 className="text-2xl font-semibold text-gray-800 mb-4">Comments</h2>
 
-          {/* New Comment Input */}
           <form onSubmit={handleAddComment} className="mb-6">
             <textarea
               value={newCommentText}
@@ -214,7 +206,6 @@ const SingleBlog = () => {
             </button>
           </form>
 
-          {/* Existing Comments List */}
           {comments.length > 0 ? (
             <div className="space-y-4">
               {comments.map((comment) => (
@@ -232,7 +223,6 @@ const SingleBlog = () => {
         </div>
 
 
-        {/* Back button */}
         <div className="text-center mt-8">
           <Link
             to="/all-blogs"
