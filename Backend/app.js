@@ -32,8 +32,7 @@ app.use(express.urlencoded({extended:false}))
 app.use(cookieParser())
 
 
-// REMOVED: Static files are no longer served locally from /public
-// app.use("/public",express.static("public"))
+
 
 //routes
 import userRoutes from "./routes/users.routes.js"
